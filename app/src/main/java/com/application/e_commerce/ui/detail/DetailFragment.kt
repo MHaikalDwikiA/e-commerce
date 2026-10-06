@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.application.e_commerce.databinding.FragmentDetailBinding
 import com.bumptech.glide.Glide
+import android.graphics.Paint
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -39,7 +40,18 @@ class DetailFragment : Fragment() {
         observeViewModel()
         viewModel.loadProductDetail(productId)
         
-        binding.btnAddToCart.setOnClickListener {
+        binding.llReviews.setOnClickListener {
+            findNavController().navigate(com.application.e_commerce.R.id.action_detailFragment_to_reviewsFragment)
+        }
+        
+        binding.btnAddToCartOutline.setOnClickListener {
+            viewModel.product.value?.let {
+                viewModel.addToCart(it)
+            }
+        }
+        
+        binding.btnBuyNow.setOnClickListener {
+            // direct to checkout or add to cart and go to cart
             viewModel.product.value?.let {
                 viewModel.addToCart(it)
             }
@@ -53,6 +65,8 @@ class DetailFragment : Fragment() {
             val priceValue = product.price.toDoubleOrNull() ?: 0.0
             val format = NumberFormat.getCurrencyInstance(Locale("id", "ID"))
             binding.tvProductPrice.text = format.format(priceValue)
+            
+            binding.tvOldPrice.paintFlags = binding.tvOldPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
             
             binding.tvDescription.text = product.description
 

@@ -1,8 +1,6 @@
-package com.application.e_commerce.ui.home
+package com.application.e_commerce.ui.productlist
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,12 +8,17 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.application.e_commerce.databinding.FragmentHomeBinding
+import androidx.recyclerview.widget.GridLayoutManager
+import com.application.e_commerce.databinding.FragmentProductListBinding
+import com.application.e_commerce.ui.home.HomeViewModel
+import com.application.e_commerce.ui.home.ProductAdapter
+import com.application.e_commerce.R
 
-class HomeFragment : Fragment() {
+class ProductListFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
+    private var _binding: FragmentProductListBinding? = null
     private val binding get() = _binding!!
+    // Menggunakan HomeViewModel sebagai provider dummy data
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var adapter: ProductAdapter
 
@@ -23,16 +26,18 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentProductListBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         
+        binding.toolbar.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
+
         setupRecyclerView()
-        setupCategoryMenu()
-        setupListeners()
         observeViewModel()
 
         if (viewModel.products.value == null) {
@@ -45,36 +50,10 @@ class HomeFragment : Fragment() {
             val bundle = Bundle().apply {
                 putString("productId", product.id)
             }
-            findNavController().navigate(com.application.e_commerce.R.id.action_homeFragment_to_detailFragment, bundle)
+            findNavController().navigate(R.id.action_productListFragment_to_detailFragment, bundle)
         }
+        binding.rvProducts.layoutManager = GridLayoutManager(context, 2)
         binding.rvProducts.adapter = adapter
-        
-        // Dummy Flash Sale Adapter (reuse ProductAdapter or just attach empty adapter for visual)
-        val flashSaleAdapter = ProductAdapter { }
-        binding.rvFlashSale.adapter = flashSaleAdapter
-    }
-
-    private fun setupCategoryMenu() {
-        // Dummy navigation for all category buttons
-        for (i in 0 until binding.llCategories.childCount) {
-            binding.llCategories.getChildAt(i).setOnClickListener {
-                findNavController().navigate(com.application.e_commerce.R.id.categoryFragment)
-            }
-        }
-    }
-
-    private fun setupListeners() {
-        binding.etSearch.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                viewModel.searchProducts(s.toString())
-            }
-            override fun afterTextChanged(s: Editable?) {}
-        })
-
-        binding.btnCart.setOnClickListener {
-            findNavController().navigate(com.application.e_commerce.R.id.action_homeFragment_to_cartFragment)
-        }
     }
 
     private fun observeViewModel() {

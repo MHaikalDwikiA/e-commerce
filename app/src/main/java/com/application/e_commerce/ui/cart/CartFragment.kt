@@ -34,6 +34,21 @@ class CartFragment : Fragment() {
         binding.toolbar.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
+        
+        binding.cbSelectAll.setOnCheckedChangeListener { _, isChecked ->
+            // Dummy logic for selecting all
+            if (isChecked) {
+                binding.btnCheckout.text = "Checkout (2)"
+                binding.tvTotalPrice.text = "Rp 150.000"
+            } else {
+                binding.btnCheckout.text = "Checkout (0)"
+                binding.tvTotalPrice.text = "Rp 0"
+            }
+        }
+        
+        binding.tvDeleteSelected.setOnClickListener {
+            Toast.makeText(requireContext(), "Item dihapus", Toast.LENGTH_SHORT).show()
+        }
 
         setupRecyclerView()
         observeViewModel()
@@ -41,8 +56,8 @@ class CartFragment : Fragment() {
         viewModel.loadCart()
 
         binding.btnCheckout.setOnClickListener {
-            if (viewModel.cartItems.value.isNullOrEmpty()) {
-                Toast.makeText(context, "Keranjang kosong", Toast.LENGTH_SHORT).show()
+            if (binding.btnCheckout.text.toString().contains("(0)")) {
+                Toast.makeText(context, "Pilih item terlebih dahulu", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             val total = viewModel.totalPrice.value ?: 0.0
@@ -66,11 +81,18 @@ class CartFragment : Fragment() {
         viewModel.cartItems.observe(viewLifecycleOwner) { items ->
             adapter.submitList(items)
             binding.tvEmptyCart.visibility = if (items.isEmpty()) View.VISIBLE else View.GONE
+            
+            // Dummy logic
+            if (items.isNotEmpty()) {
+                binding.cbSelectAll.isChecked = true
+            }
         }
 
         viewModel.totalPrice.observe(viewLifecycleOwner) { total ->
-            val format = NumberFormat.getCurrencyInstance(Locale("id", "ID"))
-            binding.tvTotalPrice.text = format.format(total)
+            if (binding.cbSelectAll.isChecked) {
+                val format = NumberFormat.getCurrencyInstance(Locale("id", "ID"))
+                binding.tvTotalPrice.text = format.format(total)
+            }
         }
 
         viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
