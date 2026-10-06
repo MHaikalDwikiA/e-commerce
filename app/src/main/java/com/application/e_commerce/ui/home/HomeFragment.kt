@@ -31,7 +31,6 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         
         setupRecyclerView()
-        setupCategoryMenu()
         setupListeners()
         observeViewModel()
 
@@ -48,19 +47,6 @@ class HomeFragment : Fragment() {
             findNavController().navigate(com.application.e_commerce.R.id.action_homeFragment_to_detailFragment, bundle)
         }
         binding.rvProducts.adapter = adapter
-        
-        // Dummy Flash Sale Adapter (reuse ProductAdapter or just attach empty adapter for visual)
-        val flashSaleAdapter = ProductAdapter { }
-        binding.rvFlashSale.adapter = flashSaleAdapter
-    }
-
-    private fun setupCategoryMenu() {
-        // Dummy navigation for all category buttons
-        for (i in 0 until binding.llCategories.childCount) {
-            binding.llCategories.getChildAt(i).setOnClickListener {
-                findNavController().navigate(com.application.e_commerce.R.id.categoryFragment)
-            }
-        }
     }
 
     private fun setupListeners() {

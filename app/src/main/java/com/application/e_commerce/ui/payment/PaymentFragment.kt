@@ -5,7 +5,6 @@ import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -43,22 +42,23 @@ class PaymentFragment : Fragment() {
     }
 
     private fun startCountdown() {
-        // 15 minutes in milliseconds
-        val timeInMillis = 15 * 60 * 1000L
+        // 24 hours in milliseconds
+        val timeInMillis = 24 * 60 * 60 * 1000L
         
         countDownTimer = object : CountDownTimer(timeInMillis, 1000) {
             override fun onTick(millisUntilFinished: Long) {
-                val ms = String.format(
+                val hms = String.format(
                     Locale.getDefault(),
-                    "%02d:%02d",
-                    TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished),
+                    "%02d:%02d:%02d",
+                    TimeUnit.MILLISECONDS.toHours(millisUntilFinished),
+                    TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) % TimeUnit.HOURS.toMinutes(1),
                     TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) % TimeUnit.MINUTES.toSeconds(1)
                 )
-                binding.tvCountdown.text = ms
+                binding.tvCountdown.text = hms
             }
 
             override fun onFinish() {
-                binding.tvCountdown.text = "00:00"
+                binding.tvCountdown.text = "00:00:00"
             }
         }.start()
     }
@@ -68,11 +68,7 @@ class PaymentFragment : Fragment() {
             .setTitle("Pembayaran Berhasil")
             .setMessage("Terima kasih, pembayaran Anda telah kami terima.")
             .setCancelable(false)
-            .setPositiveButton("Lihat Status Pesanan") { _, _ ->
-                findNavController().navigate(R.id.action_paymentFragment_to_trackingFragment)
-            }
-            .setNegativeButton("Tutup") { dialog, _ ->
-                dialog.dismiss()
+            .setPositiveButton("Kembali ke Beranda") { _, _ ->
                 findNavController().popBackStack(R.id.homeFragment, false)
             }
             .show()

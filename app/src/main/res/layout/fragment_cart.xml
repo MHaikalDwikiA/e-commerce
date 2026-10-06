@@ -4,59 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_light">
+    android:background="?android:colorBackground">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/navy_blue">
+        android:layout_height="wrap_content">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:titleTextColor="@color/white"
-            app:navigationIconTint="@color/white"
+            android:background="?attr/colorPrimary"
+            app:titleTextColor="?attr/colorOnPrimary"
+            app:navigationIconTint="?attr/colorOnPrimary"
             app:title="Keranjang Belanja"
             app:navigationIcon="@android:drawable/ic_menu_revert" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="8dp"
-            android:gravity="center_vertical"
-            android:background="@color/white">
-
-            <CheckBox
-                android:id="@+id/cbSelectAll"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Pilih Semua"
-                android:textColor="@color/navy_blue"
-                android:buttonTint="@color/navy_blue"
-                android:textAppearance="?attr/textAppearanceBodyMedium" />
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <TextView
-                android:id="@+id/tvDeleteSelected"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Hapus"
-                android:textColor="#D32F2F"
-                android:textStyle="bold"
-                android:textAppearance="?attr/textAppearanceBodyMedium"
-                android:padding="8dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:clickable="true"
-                android:focusable="true"/>
-        </LinearLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -77,16 +40,15 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Keranjang Anda kosong"
-        android:textColor="@color/navy_blue"
         android:textAppearance="?attr/textAppearanceTitleMedium"
         android:visibility="gone" />
 
-    <FrameLayout
+    <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="@color/white"
-        android:elevation="8dp">
+        android:background="?android:colorBackground"
+        app:elevation="8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -97,8 +59,7 @@
                 android:id="@+id/tvTotalLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Subtotal:"
-                android:textColor="@color/navy_blue"
+                android:text="Total:"
                 android:textAppearance="?attr/textAppearanceBodyMedium"
                 app:layout_constraintBottom_toTopOf="@id/tvTotalPrice"
                 app:layout_constraintStart_toStartOf="parent"
@@ -109,7 +70,7 @@
                 android:id="@+id/tvTotalPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/gold"
+                android:textColor="?attr/colorPrimary"
                 android:textAppearance="?attr/textAppearanceTitleMedium"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -117,27 +78,25 @@
                 app:layout_constraintTop_toBottomOf="@id/tvTotalLabel"
                 tools:text="Rp 150.000" />
 
-            <com.google.android.material.button.MaterialButton
+            <Button
                 android:id="@+id/btnCheckout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Checkout (0)"
-                android:textColor="@color/white"
-                app:backgroundTint="@color/navy_blue"
-                app:cornerRadius="8dp"
+                android:text="Checkout"
+                android:textColor="?attr/colorOnSecondary"
+                app:backgroundTint="?attr/colorSecondary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </FrameLayout>
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
 
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:indeterminateTint="@color/navy_blue"
         android:visibility="gone" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

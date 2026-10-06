@@ -1,10 +1,9 @@
 package com.application.e_commerce
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupWithNavController
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.application.e_commerce.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -20,21 +19,7 @@ class MainActivity : AppCompatActivity() {
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
 
-        binding.bottomNavView.setupWithNavController(navController)
-
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            when (destination.id) {
-                R.id.homeFragment, 
-                R.id.categoryFragment, 
-                R.id.favoriteFragment, 
-                R.id.receiptFragment, 
-                R.id.profileFragment -> {
-                    binding.bottomNavView.visibility = View.VISIBLE
-                }
-                else -> {
-                    binding.bottomNavView.visibility = View.GONE
-                }
-            }
-        }
+        // Remove setupActionBarWithNavController to allow custom toolbars
+        // setupActionBarWithNavController(navController)
     }
 }

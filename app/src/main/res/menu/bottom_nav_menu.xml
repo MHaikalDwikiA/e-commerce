@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/homeFragment"
+        android:id="@+id/nav_home"
         android:icon="@drawable/ic_home"
         android:title="Home" />
     <item
-        android:id="@+id/categoryFragment"
+        android:id="@+id/nav_category"
         android:icon="@drawable/ic_category"
         android:title="Category" />
     <item
-        android:id="@+id/favoriteFragment"
+        android:id="@+id/nav_favorite"
         android:icon="@drawable/ic_favorite"
         android:title="Favorite" />
     <item
-        android:id="@+id/receiptFragment"
+        android:id="@+id/nav_receipt"
         android:icon="@drawable/ic_receipt"
         android:title="Pesanan" />
     <item
-        android:id="@+id/profileFragment"
+        android:id="@+id/nav_person"
         android:icon="@drawable/ic_person"
         android:title="Akun" />
 </menu>

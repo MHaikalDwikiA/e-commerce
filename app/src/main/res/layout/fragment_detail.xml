@@ -9,334 +9,86 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        app:elevation="0dp">
+        android:layout_height="wrap_content">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:titleTextColor="?attr/colorOnPrimary"
+            app:navigationIconTint="?attr/colorOnPrimary"
             app:title="Detail Produk"
             app:navigationIcon="@android:drawable/ic_menu_revert" />
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:paddingBottom="80dp">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="80dp">
 
-            <!-- Carousel / Image Header -->
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <ImageView
+                android:id="@+id/ivProduct"
                 android:layout_width="match_parent"
-                android:layout_height="350dp">
+                android:layout_height="300dp"
+                android:scaleType="centerCrop"
+                tools:src="@tools:sample/backgrounds/scenic" />
 
-                <ImageView
-                    android:id="@+id/ivProduct"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    tools:src="@tools:sample/backgrounds/scenic" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginBottom="16dp"
-                    android:background="#44000000"
-                    android:padding="8dp">
-                    <!-- Dots -->
-                    <View android:layout_width="8dp" android:layout_height="8dp" android:background="#FFFFFF" android:layout_margin="4dp"/>
-                    <View android:layout_width="8dp" android:layout_height="8dp" android:background="#88FFFFFF" android:layout_margin="4dp"/>
-                    <View android:layout_width="8dp" android:layout_height="8dp" android:background="#88FFFFFF" android:layout_margin="4dp"/>
-                </LinearLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <!-- Info Section -->
-            <LinearLayout
+            <TextView
+                android:id="@+id/tvProductName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp"
-                android:background="?android:colorBackground">
+                android:layout_margin="16dp"
+                android:textAppearance="?attr/textAppearanceTitleLarge"
+                tools:text="Product Name" />
 
-                <TextView
-                    android:id="@+id/tvProductPrice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#FFD700"
-                    android:textAppearance="?attr/textAppearanceHeadlineMedium"
-                    android:textStyle="bold"
-                    tools:text="Rp 250.000" />
+            <TextView
+                android:id="@+id/tvProductPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:textColor="?attr/colorPrimary"
+                android:textAppearance="?attr/textAppearanceHeadlineMedium"
+                android:textStyle="bold"
+                tools:text="Rp 50.000" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_marginTop="4dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="Deskripsi Produk"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/tvOldPrice"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Rp 300.000"
-                        android:textColor="?android:textColorSecondary"
-                        android:textAppearance="?attr/textAppearanceBodyMedium"/>
+            <TextView
+                android:id="@+id/tvDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:textAppearance="?attr/textAppearanceBodyMedium"
+                tools:text="Product Description goes here." />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="-16%"
-                        android:textColor="#FF0000"
-                        android:background="#1AFF0000"
-                        android:paddingHorizontal="4dp"
-                        android:paddingVertical="2dp"
-                        android:layout_marginStart="8dp"
-                        android:textAppearance="?attr/textAppearanceLabelSmall"/>
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/tvProductName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:textAppearance="?attr/textAppearanceTitleLarge"
-                    tools:text="Product Name Here" />
-
-                <!-- Rating & Sold -->
-                <LinearLayout
-                    android:id="@+id/llReviews"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_marginTop="8dp"
-                    android:background="?selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true">
-
-                    <ImageView
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
-                        android:src="@android:drawable/star_on"
-                        app:tint="#FFD700" />
-
-                    <TextView
-                        android:id="@+id/tvRatingAndSold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:text="4.8 | 2,3rb Terjual"
-                        android:textAppearance="?attr/textAppearanceBodyMedium" />
-
-                    <ImageView
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
-                        android:layout_marginStart="4dp"
-                        android:src="@android:drawable/ic_media_next"
-                        app:tint="?android:textColorSecondary" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="?android:listDivider"
-                    android:layout_marginVertical="16dp" />
-
-                <!-- Variants -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Pilih Warna"
-                    android:textAppearance="?attr/textAppearanceTitleMedium"
-                    android:textStyle="bold" />
-
-                <com.google.android.material.chip.ChipGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    app:singleSelection="true">
-                    <com.google.android.material.chip.Chip
-                        style="@style/Widget.Material3.Chip.Filter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Hitam"
-                        android:checked="true" />
-                    <com.google.android.material.chip.Chip
-                        style="@style/Widget.Material3.Chip.Filter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Putih" />
-                    <com.google.android.material.chip.Chip
-                        style="@style/Widget.Material3.Chip.Filter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Merah" />
-                </com.google.android.material.chip.ChipGroup>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="Pilih Ukuran"
-                    android:textAppearance="?attr/textAppearanceTitleMedium"
-                    android:textStyle="bold" />
-
-                <com.google.android.material.chip.ChipGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    app:singleSelection="true">
-                    <com.google.android.material.chip.Chip
-                        style="@style/Widget.Material3.Chip.Filter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="S" />
-                    <com.google.android.material.chip.Chip
-                        style="@style/Widget.Material3.Chip.Filter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="M"
-                        android:checked="true" />
-                    <com.google.android.material.chip.Chip
-                        style="@style/Widget.Material3.Chip.Filter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="L" />
-                    <com.google.android.material.chip.Chip
-                        style="@style/Widget.Material3.Chip.Filter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="XL" />
-                </com.google.android.material.chip.ChipGroup>
-
-                <!-- Quantity Stepper -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_marginTop="16dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Jumlah"
-                        android:textAppearance="?attr/textAppearanceTitleMedium"
-                        android:textStyle="bold" />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:background="#F0F0F0"
-                        android:padding="4dp">
-
-                        <ImageView
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:padding="8dp"
-                            android:src="@android:drawable/ic_media_previous" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="1"
-                            android:layout_marginHorizontal="16dp"
-                            android:textAppearance="?attr/textAppearanceTitleMedium" />
-
-                        <ImageView
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:padding="8dp"
-                            android:src="@android:drawable/ic_input_add" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="?android:listDivider"
-                    android:layout_marginVertical="16dp" />
-
-                <!-- Description -->
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Deskripsi Produk"
-                    android:textAppearance="?attr/textAppearanceTitleMedium"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tvDescription"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:textAppearance="?attr/textAppearanceBodyMedium"
-                    tools:text="Product Description goes here." />
-
-            </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <!-- Sticky Bottom Bar -->
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/btnAddToCart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         android:layout_gravity="bottom"
-        android:background="?android:colorBackground"
-        android:elevation="8dp"
-        android:padding="12dp">
-
-        <ImageView
-            android:id="@+id/btnChat"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@android:drawable/ic_dialog_email"
-            android:padding="12dp"
-            android:background="?selectableItemBackgroundBorderless"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnAddToCartOutline"
-            style="@style/Widget.Material3.Button.OutlinedButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="+ Keranjang"
-            android:layout_marginStart="8dp"
-            app:layout_constraintStart_toEndOf="@id/btnChat"
-            app:layout_constraintEnd_toStartOf="@id/btnBuyNow"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnBuyNow"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Beli Sekarang"
-            android:layout_marginStart="8dp"
-            app:backgroundTint="#FFD700"
-            android:textColor="#000000"
-            app:layout_constraintStart_toEndOf="@id/btnAddToCartOutline"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        android:text="Tambah Keranjang"
+        app:backgroundTint="?attr/colorSecondary"
+        android:textColor="?attr/colorOnSecondary"
+        app:iconTint="?attr/colorOnSecondary"
+        app:icon="@android:drawable/ic_menu_add" />
 
     <ProgressBar
         android:id="@+id/progressBar"
