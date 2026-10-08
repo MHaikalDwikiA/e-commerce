@@ -50,4 +50,4 @@ Bagi pengguna awam (Non-Developer) yang hanya ingin menguji coba aplikasi secara
 4. Buka aplikasi ShopiKu dan selamat berbelanja!
 
 ---
-*Developed with ❤️ as E-Commerce Cloning Project.*
+*Developed by Mohamad Haikal Dwiki Akbar🙌.*
